@@ -36,6 +36,7 @@ body {
   will-change: transform, opacity;
 }
 
+
 /*
   10 slides × 2s = 20s total cycle
   Each slide is visible for ~2 seconds.
@@ -53,21 +54,37 @@ body {
 
 /* Enter from off-page right, hold, exit off-page left */
 @keyframes slide {
-  /* start hidden off the page to the right */
-  0%   { opacity: 0; transform: translateX(100vw); }
+  /* Start off-page right, invisible */
+  0% {
+    opacity: 0;
+    transform: translateX(100vw);
+  }
 
-  /* fade in + move to center */
-  2%   { opacity: 1; transform: translateX(0); }
+  /* Fade in while moving to center */
+  3% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 
-  /* hold centered (most of the 2s window) */
-  10%  { opacity: 1; transform: translateX(0); }
+  /* Hold fully visible */
+  10% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 
-  /* swipe fully off the page to the left + fade out */
-  12%  { opacity: 0; transform: translateX(-100vw); }
+  /* Fade out WHILE moving off-page left */
+  18% {
+    opacity: 0;
+    transform: translateX(-100vw);
+  }
 
-  /* remain hidden off-page until next cycle */
-  100% { opacity: 0; transform: translateX(-100vw); }
+  /* Stay hidden off-page */
+  100% {
+    opacity: 0;
+    transform: translateX(-100vw);
+  }
 }
+
 
 /* NOTE:
    If animations appear "stuck", check your OS/browser
