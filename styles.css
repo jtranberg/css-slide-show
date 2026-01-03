@@ -21,7 +21,7 @@ body {
   border: 1px solid #000;
 }
 
-/* Slides (fade in, then swipe left while fading out) */
+/* Slides (fade in, then swipe off-page left while fading out) */
 .slideshow img {
   position: absolute;
   inset: 0;
@@ -30,7 +30,7 @@ body {
   object-fit: cover;
 
   opacity: 0;
-  transform: translateX(30px);
+  transform: translateX(100vw);
 
   animation: slide 20s linear infinite;
   will-change: transform, opacity;
@@ -51,10 +51,10 @@ body {
 .slideshow img:nth-child(9)  { animation-delay: 16s; }
 .slideshow img:nth-child(10) { animation-delay: 18s; }
 
-/* Enter from right, hold, exit left */
+/* Enter from off-page right, hold, exit off-page left */
 @keyframes slide {
-  /* start hidden off to the right */
-  0%   { opacity: 0; transform: translateX(30px); }
+  /* start hidden off the page to the right */
+  0%   { opacity: 0; transform: translateX(100vw); }
 
   /* fade in + move to center */
   2%   { opacity: 1; transform: translateX(0); }
@@ -62,11 +62,11 @@ body {
   /* hold centered (most of the 2s window) */
   10%  { opacity: 1; transform: translateX(0); }
 
-  /* swipe left + fade out */
-  12%  { opacity: 0; transform: translateX(-30px); }
+  /* swipe fully off the page to the left + fade out */
+  12%  { opacity: 0; transform: translateX(-100vw); }
 
-  /* remain hidden until next cycle */
-  100% { opacity: 0; transform: translateX(-30px); }
+  /* remain hidden off-page until next cycle */
+  100% { opacity: 0; transform: translateX(-100vw); }
 }
 
 /* NOTE:
@@ -86,3 +86,4 @@ body {
     opacity: 1;
   }
 } */
+.slideshow { overflow: visible; }
