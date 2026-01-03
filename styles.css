@@ -1,0 +1,78 @@
+/* Page layout */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: system-ui, sans-serif;
+}
+
+.wrap {
+  padding: 24px;
+}
+
+/* Slideshow frame */
+.slideshow {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid #000;
+}
+
+/* Slides */
+.slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  opacity: 0;
+  animation: fade 20s linear infinite;
+}
+
+/*
+  10 slides × 2s = 20s total cycle
+  Each slide is visible for 2 seconds.
+*/
+.slideshow img:nth-child(1)  { animation-delay: 0s; }
+.slideshow img:nth-child(2)  { animation-delay: 2s; }
+.slideshow img:nth-child(3)  { animation-delay: 4s; }
+.slideshow img:nth-child(4)  { animation-delay: 6s; }
+.slideshow img:nth-child(5)  { animation-delay: 8s; }
+.slideshow img:nth-child(6)  { animation-delay: 10s; }
+.slideshow img:nth-child(7)  { animation-delay: 12s; }
+.slideshow img:nth-child(8)  { animation-delay: 14s; }
+.slideshow img:nth-child(9)  { animation-delay: 16s; }
+.slideshow img:nth-child(10) { animation-delay: 18s; }
+
+
+/* Hard "on then off" visibility */
+@keyframes fade {
+  0%   { opacity: 0; }
+  1%   { opacity: 1; }
+  10%  { opacity: 1; }  /* ~0.2s of visible time within each 2s cycle */
+  11%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+
+
+/* NOTE:
+   If animations appear "stuck", check your OS/browser
+   "Reduce Motion" accessibility setting.
+*/
+
+/* Accessibility: disable animation if user prefers reduced motion */
+/* @media (prefers-reduced-motion: reduce) {
+  .slideshow img {
+    animation: none;
+    opacity: 0;
+  }
+
+  .slideshow img:first-child {
+    opacity: 1;
+  }
+} */
+
