@@ -21,20 +21,24 @@ body {
   border: 1px solid #000;
 }
 
-/* Slides */
+/* Slides (fade in, then swipe left while fading out) */
 .slideshow img {
   position: absolute;
   inset: 0;
   width: 300px;
   height: 300px;
   object-fit: cover;
+
   opacity: 0;
-  animation: fade 20s linear infinite;
+  transform: translateX(30px);
+
+  animation: slide 20s linear infinite;
+  will-change: transform, opacity;
 }
 
 /*
   10 slides × 2s = 20s total cycle
-  Each slide is visible for 2 seconds.
+  Each slide is visible for ~2 seconds.
 */
 .slideshow img:nth-child(1)  { animation-delay: 0s; }
 .slideshow img:nth-child(2)  { animation-delay: 2s; }
@@ -47,17 +51,23 @@ body {
 .slideshow img:nth-child(9)  { animation-delay: 16s; }
 .slideshow img:nth-child(10) { animation-delay: 18s; }
 
+/* Enter from right, hold, exit left */
+@keyframes slide {
+  /* start hidden off to the right */
+  0%   { opacity: 0; transform: translateX(30px); }
 
-/* Hard "on then off" visibility */
-@keyframes fade {
-  0%   { opacity: 0; }
-  1%   { opacity: 1; }
-  10%  { opacity: 1; }  /* ~0.2s of visible time within each 2s cycle */
-  11%  { opacity: 0; }
-  100% { opacity: 0; }
+  /* fade in + move to center */
+  2%   { opacity: 1; transform: translateX(0); }
+
+  /* hold centered (most of the 2s window) */
+  10%  { opacity: 1; transform: translateX(0); }
+
+  /* swipe left + fade out */
+  12%  { opacity: 0; transform: translateX(-30px); }
+
+  /* remain hidden until next cycle */
+  100% { opacity: 0; transform: translateX(-30px); }
 }
-
-
 
 /* NOTE:
    If animations appear "stuck", check your OS/browser
@@ -69,10 +79,10 @@ body {
   .slideshow img {
     animation: none;
     opacity: 0;
+    transform: none;
   }
 
   .slideshow img:first-child {
     opacity: 1;
   }
 } */
-
